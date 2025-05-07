@@ -1,0 +1,1 @@
+python3 testOlf.py --batch_size 128 --prot_transformer_depth 4 --smiles_transformer_depth 3 --cross_block_depth 1 --is_prot_bpe 1 --is_grad_dec 0 --is_prot_add_positional_info 0 --is_smile_add_positional_info 0 --gamma 0.995 --seed 42 --gpu=cuda:0
