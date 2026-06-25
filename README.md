@@ -1,68 +1,31 @@
 # CrossVOI
 
 ## Introduction
-CrossVOI is a deep learning model designed for predicting the functionality of human olfactory receptors. It enables rapid and efficient batch prediction of the interaction between ORs (olfactory receptors) and VOCs (volatile organic compounds). CrossVOI utilizes a self-attention module based on the Transformer architecture to extract features from the input sequences and employs cross-attention to fuse features from both OR and VOC. For more detailed information on CrossVOI, please refer to: "**AI-powered virtual screening improves function prediction of human olfactory receptors**" (to be published).
-
-## Dependence
-
-`subword_nmt==0.3.8`
-
-`numpy==1.26.4`
-
-`pandas==2.2.2`
-
-`pytorch==2.4.1`
-
-`scikit_learn==1.0.2`
-
-`tqdm==4.66.5`
-
-`transformers==4.19.2`
-
-`tensorboard==2.17.0`
+This repository contains the model code used for attention-based analysis of human olfactory receptors (ORs) in our study. The code implements the CrossVOI framework, which integrates a protein language model with a cross-attention mechanism to predict VOC-OR interactions and extract residue-level attention scores. These attention scores are further analyzed to explore the functional regions of ORs at both the family and individual levels. For more detailed information on CrossVOI, please refer to: "**Cross-attention and language models reveal the interpretability of functional predictions for the human olfactory receptor family**" (to be published).
 
 ## Project Structure
 **data**: Store the data file and perform the data preprocessing process.
 
-&emsp;**data_preprocess.py**:  Data preprocessing process.
+**attention_weights**: The folder used to store the extracted attention scores.
 
-&emsp;**csv_file**: Dataset for training or testing.
+**models**: The model file saved after training.
 
-**trans_bpe**: The main working path includes the model framework, training and testing sections.
+**models.py**: Model structure definition file.
 
-&emsp;**model.py**: Model framework definition.
+**train.py**: Training model script.
 
-&emsp;**trainOlf.py**: Model training process.
+**predict.py**: Testing model script.
 
-&emsp;**testOlf.py**: Model testing process
+**extra_attention.py**: Extract the cross-attention scores and save them in a pkl file.
 
-&emsp;**run_train.sh**: Training scrtpt.
+**extra_self_attention.py**: Extract the self-attention scores and save them in a pkl file.
 
-&emsp;**run_test.sh**: Testing script.
+## Note
+Due to file size limitations, the preprocessed feature files and the protein language model checkpoint used for feature extraction are not included in this repository. To reproduce the analysis, please download the required language model separately and run the provided preprocessing scripts to generate the feature files. 
 
-**trans_utils**: Utilities.
+This repository is intended for research purposes — specifically, to facilitate the exploration and interpretation of attention distribution patterns in olfactory receptors. It is not designed as a production-ready software tool or a general-purpose prediction service. As such, the code may not be as rigorously organized, documented, or optimized as a software engineering project would be. Users interested in reproducibility are encouraged to refer to the methodology section of the accompanying paper for detailed experimental settings.
 
-## Usage
-### 1.Data preprocessing
-Before proceeding with further functional predictions, you need to preprocess your data.
-
-（1）Organize the experimental data into CSV format files, where OR, VOC, and their interaction relationships are saved as seq.csv, voc.csv, and inter.csv respectively. Please refer to the example files in the csv_file directory for the specific format of CSV files.
-
-（2）Execute the preprocessing script (You can modify the corresponding parameters in the script to specify the name of the data file to be saved):
-
-`python data_preprocess.py`
-
-The processed data file will be saved in the data path, and you can read it later when training the model or making predictions.
-
-### 2.Train the model using experimental data
-Execute the training script (You can modify the corresponding parameters in the script to specify the name of the data file to be loaded):
-
-`bash run_train.sh`
-
-### 3.Utilize the trained model to predict the interaction relationships for the target OR-VOC pairs
-Execute the training script (You can modify the corresponding parameters in the script to specify the name of the data file to be loaded):
-
-`bash run_test.sh`
+Additional scripts for statistical analysis and visualization will be added in the near future. The current release includes the core model code and basic extraction utilities. The supplementary notebooks and plotting scripts used for generating the figures in the paper are not yet included but will be uploaded soon.
 
 
 
